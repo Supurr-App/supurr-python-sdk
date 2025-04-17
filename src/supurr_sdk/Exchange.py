@@ -10,7 +10,7 @@ import time
 import requests
 from typing import Literal, TypedDict, cast, Any
 from supurr_sdk.constants import (
-    zero_address,
+    auth_msg_raw,
     contracts,
     exchange_remote_hosts,
     ValidTokens,
@@ -164,9 +164,7 @@ class Signer:
 
     def __init__(self, _private_key: str, nonce: int):
         self.account = Account.from_key(_private_key)
-        auth_msg = encode_defunct(
-            text="Sign to verify your user address with Buffer Finance v2.5 on Arbitrum One and Arbitrum Goerli"
-        )
+        auth_msg = encode_defunct(text=auth_msg_raw)
         pack = self.account.sign_message(auth_msg)
         self.auth_key = Web3.toHex(cast(Any, pack)["signature"])
         self.nonce = nonce
