@@ -13,7 +13,7 @@ pip install supurr-sdk
 ### Initialize the Exchange
 
 ```python
-from supurr_sdk.Exchange import SupurrExchange
+from supurr_sdk import SupurrExchange
 
 # Initialize with your private key and desired product
 exchange = SupurrExchange(
@@ -94,10 +94,10 @@ current_markets = exchange.product.markets
 
 - BTCUSD (with price precision of 1)
 
-
 ## Error Handling
 
 The SDK includes built-in validation for:
+
 - Invalid expiration times
 - Invalid strike prices
 - Market availability
@@ -118,4 +118,3 @@ To run the test suite:
 ```bash
 pytest tests/
 ```
-
