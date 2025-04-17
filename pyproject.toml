@@ -1,6 +1,6 @@
 [project]
 name = "supurr-sdk"
-version = "0.1.3"
+version = "0.1.4"
 description = ""
 authors = [
     {name = "Your Name",email = "you@example.com"}
