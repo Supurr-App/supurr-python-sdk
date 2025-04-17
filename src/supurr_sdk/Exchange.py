@@ -921,12 +921,12 @@ class AboveBelowProduct(Product):
             "asset_pair": self.active_market.name,
         }
         print("apiParams", apiParams)
-        # r = requests.post(
-        #     f"{api}create/", json=apiParams, params={"environment": chain["id"]}
-        # )
-        # r.raise_for_status()
-        # res = r.json()
-        # return res
+        r = requests.post(
+            f"{api}create/", json=apiParams, params={"environment": chain["id"]}
+        )
+        r.raise_for_status()
+        res = r.json()
+        return res
 
     def get_max_trade_size(self, context: Any) -> int:
         return 3

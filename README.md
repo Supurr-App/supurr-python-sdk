@@ -87,7 +87,13 @@ current_price = exchange.price_provider.get_price(exchange.product.active_market
 
 ## Available Markets
 
+```python
+# Get current price for the active market
+current_markets = exchange.product.markets
+```
+
 - BTCUSD (with price precision of 1)
+
 
 ## Error Handling
 
