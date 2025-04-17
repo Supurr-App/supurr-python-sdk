@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Poetry Debug",
+        "request": "launch",
+        "type": "debugpy",
+        "console": "integratedTerminal",
+        "justMyCode": true,
+        "program": "/home/amit/work/supurr-sdk/src/supurr_sdk/__init__.py",
+        "env": {
+          "PYTHONPATH": "${workspaceFolder}"
+        },
+        "python": "/home/amit/work/supurr-sdk/.venv/bin/python"
+      }
+    ]
+  }
+  
