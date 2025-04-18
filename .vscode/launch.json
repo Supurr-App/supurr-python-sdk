@@ -7,7 +7,7 @@
         "type": "debugpy",
         "console": "integratedTerminal",
         "justMyCode": true,
-        "program": "/home/amit/work/supurr-sdk/src/supurr_sdk/__init__.py",
+        "program": "/home/amit/work/supurr-sdk/tests/__init__.py",
         "env": {
           "PYTHONPATH": "${workspaceFolder}"
         },

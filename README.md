@@ -77,6 +77,16 @@ result = exchange.place_trade(
 current_price = exchange.price_provider.get_price(exchange.product.active_market)
 ```
 
+### Retrieving Trade History
+
+```python
+# Get all trades for the current user of particular product
+user_trades = exchange.get_user_ongoing_trades()
+
+# Get all trades across the protocol of particular product
+all_trades = exchange.get_all_ongoing_trades()
+```
+
 ## Features
 
 - Support for both Up/Down and Above/Below trading products

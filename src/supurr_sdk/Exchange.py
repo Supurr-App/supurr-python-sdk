@@ -1,7 +1,10 @@
+from __future__ import annotations
+
 from abc import ABC, abstractmethod
 from enum import Enum
 from datetime import datetime, timedelta, timezone
 import math
+
 from supurr_sdk.utils import is_valid_literal
 from eth_account import Account
 from eth_account.messages import encode_structured_data, encode_defunct
@@ -22,6 +25,7 @@ from supurr_sdk.constants import (
     ValidProducts,
     pyth_info,
     chain,
+    zero_address,
 )
 
 
@@ -310,6 +314,33 @@ class Product(ABC):
     def get_valid_expiry_timestamps(self) -> list[int]:
         pass
 
+    def get_trades(self, context: SupurrExchange | None = None):
+        r = None
+        if context:
+            user = context.user.account
+            r = requests.get(
+                f"{api}trades/user/ongoing/",
+                params={
+                    "user_address": cast(Any, user).address,
+                    "environment": chain["id"],
+                    "product_id": self.product_id,
+                },
+            )
+        else:
+            r = requests.get(
+                f"{api}trades/all_active/",
+                params={
+                    "user_address": zero_address,
+                    "environment": chain["id"],
+                    "limit": 10000,
+                    "page": 0,
+                    "product_id": self.product_id,
+                },
+            )
+        r.raise_for_status()
+        res = r.json()
+        return res
+
 
 class Token(Market, SignerManager):
     decimals: int
@@ -561,6 +592,12 @@ class SupurrExchange:
 
     def get_max_trade_size(self) -> int:
         return self.product.get_max_trade_size(context=self)
+
+    def get_user_ongoing_trades(self):
+        return self.product.get_trades(context=self)
+
+    def get_all_ongoing_trades(self):
+        return self.product.get_trades()
 
 
 class UpDownProduct(Product):
