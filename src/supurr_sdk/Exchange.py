@@ -341,6 +341,35 @@ class Product(ABC):
         res = r.json()
         return res
 
+    def get_past_trades(self, context: SupurrExchange | None = None):
+        r = None
+        if context:
+            user = context.user.account
+            r = requests.get(
+                f"{api}trades/user/history/",
+                params={
+                    "user_address": cast(Any, user).address,
+                    "environment": chain["id"],
+                    "limit": 10000,
+                    "page": 0,
+                    "product_id": self.product_id,
+                },
+            )
+        else:
+            r = requests.get(
+                f"{api}trades/all_history/",
+                params={
+                    "user_address": zero_address,
+                    "environment": chain["id"],
+                    "limit": 10000,
+                    "page": 0,
+                    "product_id": self.product_id,
+                },
+            )
+        r.raise_for_status()
+        res = r.json()
+        return res
+
 
 class Token(Market, SignerManager):
     decimals: int
@@ -598,6 +627,12 @@ class SupurrExchange:
 
     def get_all_ongoing_trades(self):
         return self.product.get_trades()
+
+    def get_user_past_trades(self):
+        return self.product.get_past_trades(context=self)
+
+    def get_all_past_trades(self):
+        return self.product.get_past_trades()
 
 
 class UpDownProduct(Product):
