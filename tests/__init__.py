@@ -123,7 +123,7 @@ def test_above_below_trade():
     print("test above below passed")
 
 
-def test_trade_fetching():
+def test_ongoing_trade_fetching():
     exchange = SupurrExchange(pk=dummy_account["pk"], product="up_down")
     exchange.product.set_active_market("BTCUSD")
 
@@ -134,5 +134,16 @@ def test_trade_fetching():
     print("all trades", trades)
 
 
+def test_historical_trade_fetching():
+    exchange = SupurrExchange(pk=dummy_account["pk"], product="up_down")
+    exchange.product.set_active_market("BTCUSD")
+
+    trades = exchange.get_user_past_trades()
+    print("user trades", trades)
+
+    trades = exchange.get_all_past_trades()
+    print("all trades", trades)
+
+
 print("executing file")
-test_trade_fetching()
+test_historical_trade_fetching()

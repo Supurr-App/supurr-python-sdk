@@ -80,11 +80,17 @@ current_price = exchange.price_provider.get_price(exchange.product.active_market
 ### Retrieving Trade History
 
 ```python
-# Get all trades for the current user of particular product
-user_trades = exchange.get_user_ongoing_trades()
+# Get all ongoing trades for the current user of particular product
+user_ongoing_trades = exchange.get_user_ongoing_trades()
 
-# Get all trades across the protocol of particular product
-all_trades = exchange.get_all_ongoing_trades()
+# Get all ongoing trades across the protocol of particular product
+all_ongoing_trades = exchange.get_all_ongoing_trades()
+
+# Get all past trades for the current user of particular product
+user_past_trades = exchange.get_user_past_trades()
+
+# Get all past trades across the protocol of particular product
+all_past_trades = exchange.get_all_past_trades()
 ```
 
 ## Features
